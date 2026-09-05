@@ -2,7 +2,6 @@ import os
 from PIL import Image
 
 from torch.utils.data import Dataset
-from torchvision import transforms
 
 
 class Rain100LDataset(Dataset):
@@ -13,12 +12,20 @@ class Rain100LDataset(Dataset):
     target folder : clean images
     """
 
-    def __init__(self, root_dir, transform=None):
+    def __init__(self, root_dir, transform=None, split="train"):
 
         self.input_dir = os.path.join(root_dir, "input")
         self.target_dir = os.path.join(root_dir, "target")
 
-        self.images = sorted(os.listdir(self.input_dir))
+        self.images = sorted(
+            os.listdir(self.input_dir)
+        )
+
+        if split == "train":
+            self.images = self.images[:80]
+
+        elif split == "val":
+            self.images = self.images[80:]
 
         self.transform = transform
 
@@ -40,7 +47,6 @@ class Rain100LDataset(Dataset):
             self.target_dir,
             img_name
         )
-
 
         rainy = Image.open(rainy_path).convert("RGB")
         clean = Image.open(clean_path).convert("RGB")
