@@ -4,7 +4,7 @@ Adaptive Spike-Native Spiking Neural Network for Energy-Efficient Image Derainin
 
 ## Research Objective
 
-This project aims to develop an adaptive Spiking Neural Network (SNN) framework for image deraining.
+This project aims to develop an adaptive Spiking Neural Network (SNN) framework for single image deraining.
 
 The proposed framework focuses on:
 
@@ -51,12 +51,15 @@ Clean Image
 ## Research Gaps
 
 1. Fixed time steps in SNN-based deraining
+
 2. Traditional operations inside SNN
+
 3. Lack of spike-based attention
+
 4. Lack of energy-aware optimization
 
 
-## Dataset
+## Datasets
 
 The model will be evaluated on:
 
@@ -70,4 +73,15 @@ The model will be evaluated on:
 
 - PyTorch
 - SpikingJelly
+- OpenCV
 - Kaggle GPU
+## Project Structure
+Adaptive-SpikeRain
+│
+├── data # Dataset loading and preprocessing
+├── models # SNN architecture modules
+├── baselines # Comparison models
+├── losses # Training objectives
+├── utils # Metrics and visualization
+├── scripts # Experiment scripts
+└── notebooks # Kaggle experiments

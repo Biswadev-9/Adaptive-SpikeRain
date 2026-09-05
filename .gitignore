@@ -17,11 +17,15 @@ runs/
 logs/
 tensorboard/
 
-# Dataset files
-datasets/*
+# Raw datasets
+data/raw/
+data/processed/
 
 # Kaggle files
 kaggle/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
 
 # VS Code
 .vscode/
