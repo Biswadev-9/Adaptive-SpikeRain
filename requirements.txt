@@ -11,4 +11,4 @@ pyyaml
 
 tensorboard
 
-spikingjelly==0.0.0.14
+spikingjelly==0.0.0.0.14
