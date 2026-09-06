@@ -1,6 +1,8 @@
 import os
+import random
 from PIL import Image
 
+import torchvision.transforms.functional as TF
 from torch.utils.data import Dataset
 
 
@@ -27,7 +29,7 @@ class Rain100LDataset(Dataset):
         elif split == "val":
             self.images = self.images[80:]
 
-        self.transform = transform
+        self.split = split
 
 
     def __len__(self):
@@ -48,13 +50,35 @@ class Rain100LDataset(Dataset):
             img_name
         )
 
+
         rainy = Image.open(rainy_path).convert("RGB")
         clean = Image.open(clean_path).convert("RGB")
 
 
-        if self.transform:
-            rainy = self.transform(rainy)
-            clean = self.transform(clean)
+        # Resize both images equally
+        rainy = TF.resize(rainy, (256, 256))
+        clean = TF.resize(clean, (256, 256))
+
+
+        # Apply augmentation only for training
+        if self.split == "train":
+
+            # Same horizontal flip
+            if random.random() > 0.5:
+                rainy = TF.hflip(rainy)
+                clean = TF.hflip(clean)
+
+
+            # Same rotation
+            angle = random.uniform(-10, 10)
+
+            rainy = TF.rotate(rainy, angle)
+            clean = TF.rotate(clean, angle)
+
+
+        # Convert PIL -> Tensor
+        rainy = TF.to_tensor(rainy)
+        clean = TF.to_tensor(clean)
 
 
         return rainy, clean
