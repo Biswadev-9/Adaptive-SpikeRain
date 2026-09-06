@@ -12,7 +12,7 @@ class Rain100LDataset(Dataset):
     target folder : clean images
     """
 
-    def __init__(self, root_dir, transform=None, split="train"):
+    def __init__(self, root_dir, split="train"):
 
         self.input_dir = os.path.join(root_dir, "input")
         self.target_dir = os.path.join(root_dir, "target")
